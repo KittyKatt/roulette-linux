@@ -7,13 +7,10 @@ FROM ubuntu:latest
 
 MAINTAINER Brett Bohnenkamper version: 0.1-A
 
-# COPY start-roullete.sh /start-roullete.sh
 COPY entrypoint.sh /etc/entrypoint.sh
 COPY bash.bashrc /etc/
 COPY crontab /etc/cron.d/roullete
 COPY roulette.sh /tmp/roulette.sh
-COPY commands.txt /tmp/commands.txt
-# RUN /bin/bash /start-roullete.sh
 
 RUN \
   apt-get update && \
@@ -23,7 +20,6 @@ RUN \
   chmod 0644 /etc/cron.d/roullete && \
   chmod 0777 /etc/entrypoint.sh && \
   chmod 0777 /tmp/roulette.sh && \
-  chmod 0777 /tmp/commands.txt && \
   crontab /etc/cron.d/roullete
 
 VOLUME ["/var/www/html"]
