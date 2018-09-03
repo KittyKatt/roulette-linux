@@ -1,11 +1,11 @@
-# linux-roullete
+# roulette-linux
 # 
-# Inspired by suicide-linux by tiagoad.
+# Inspired by suicide-linux.
 #
 
 FROM ubuntu:latest
 
-MAINTAINER Brett Bohnenkamper version: 0.1-A
+MAINTAINER Brett Bohnenkamper version: 1.0
 
 COPY entrypoint.sh /etc/entrypoint.sh
 COPY bash.bashrc /etc/
