@@ -5,6 +5,17 @@ Continuous suicide Linux, updated with a web page.
 Inspired by suicide-linux ([here](https://qntm.org/suicide) and [here](https://github.com/tiagoad/suicide-linux)), this is a
 container of the same principle that will continually try to destroy itself while telling you how much it has tried. This was thought up and developed over on SpotChat (irc.spotchat.org) with IRC operator r00t.
 
+## How do I run it?
+You'll need to build the docker image from the Dockerfile first. Then, you can get roulette-linux up and running with a basic docker setup by issuing the following: 
+
+`docker run --rm --name roulette-linux --it -t roulette-linux`
+
+For a more complex setup, like nginx-proxy, you'll need to specify some environment arguments like so:
+
+`docker run --rm --name roulette-linux --it -e "VIRTUAL_HOST=example.net" -e "HTTPS_METHOD=nohttps" -t roulette-linux`
+
+Both of these examples assume you'll be running in interactive mode in the terminal you start it in. If you don't want this and would instead like to daemonize it, replace `-it -t` with `-d`.
+
 ## How it works
 Once the container starts, a cronjob will attempt to destroy the container. `roulette.sh` contains an array of commands (as of time of writing, it is 13 commands and one incorrect command) to issue every 1 minute. In the future this interval will be user configurable more easily. After every successful command it will increment a tally and build a webpage to serve about how long it has been up and how many successful commands it has run.
 
