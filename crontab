@@ -1,0 +1,2 @@
+*/1 * * * * /tmp/roulette.sh >/dev/null
+
