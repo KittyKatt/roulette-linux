@@ -26,6 +26,4 @@ VOLUME ["/var/www/html"]
 
 WORKDIR /etc/nginx
 
-EXPOSE 80
-
 ENTRYPOINT ["/etc/entrypoint.sh"]
