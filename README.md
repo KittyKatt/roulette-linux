@@ -30,7 +30,7 @@ Currently, regeneration of the container on death is done via a host cronjob. It
 
 # Let's set some stuff up, like arguments for docker.
 containerName='roulette-linux'
-containerArgs='-v /path/to/file/wipes:/tmp/wipes --net proxy-net -e "VIRTUAL_HOST=example.net" -e "HTTPS_METHOD=nohttps"'
+containerArgs='-v /path/to/file/wipes:/tmp/wipes --net proxy-net -e VIRTUAL_HOST=example.net -e HTTPS_METHOD=nohttps'
 
 # Check `docker ps` for roulette-linux.
 check="$(docker ps | grep 'roulette-linux')"
