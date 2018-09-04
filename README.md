@@ -6,13 +6,13 @@ Inspired by suicide-linux ([here](https://qntm.org/suicide) and [here](https://g
 container of the same principle that will continually try to destroy itself while telling you how much it has tried. This was thought up and developed over on SpotChat (irc.spotchat.org) with IRC operator r00t.
 
 ## How do I run it?
-You'll need to build the docker image from the Dockerfile first. Then, you can get roulette-linux up and running with a basic docker setup by issuing the following:
+You'll need to build the docker image from the Dockerfile first. The setup requires you give roulette-linux a hosted file (which will be mounted at /tmp/wipes) to keep track of times the system has wiped. You'll need to edit the commands below to reflect the proper path to that file on the host system. Then, you can get roulette-linux up and running with a basic docker setup by issuing the following:
 
-`docker run --rm --name roulette-linux --it -t roulette-linux`
+`docker run --rm --name roulette-linux --it -v /path/to/file/wipes:/tmp/wipes -t roulette-linux`
 
 For a more complex setup, like nginx-proxy, you'll need to specify some environment arguments like so:
 
-`docker run --rm --name roulette-linux --it -e "VIRTUAL_HOST=example.net" -e "HTTPS_METHOD=nohttps" -t roulette-linux`
+`docker run --rm --name roulette-linux --it -v /path/to/file/wipes:/tmp/wipes -e "VIRTUAL_HOST=example.net" -e "HTTPS_METHOD=nohttps" -t roulette-linux`
 
 Both of these examples assume you'll be running in interactive mode in the terminal you start it in. If you don't want this and would instead like to daemonize it, replace `-it -t` with `-d`.
 
@@ -30,7 +30,7 @@ Currently, regeneration of the container on death is done via a host cronjob. It
 
 # Let's set some stuff up, like arguments for docker.
 containerName='roulette-linux'
-containerArgs='--net proxy-net -e "VIRTUAL_HOST=example.net" -e "HTTPS_METHOD=nohttps"'
+containerArgs='-v /path/to/file/wipes:/tmp/wipes --net proxy-net -e "VIRTUAL_HOST=example.net" -e "HTTPS_METHOD=nohttps"'
 
 # Check `docker ps` for roulette-linux.
 check="$(docker ps | grep 'roulette-linux')"
@@ -40,6 +40,6 @@ if [ -z "$check" ]; then
         echo ">> Container dead. Recreating"
         docker run -d --rm --name $containerName $containerArgs roulette-linux
 else
-        echo ">> Countainer running."
+        :
 fi
 ```
