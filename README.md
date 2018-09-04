@@ -6,13 +6,13 @@ Inspired by suicide-linux ([here](https://qntm.org/suicide) and [here](https://g
 container of the same principle that will continually try to destroy itself while telling you how much it has tried. This was thought up and developed over on SpotChat (irc.spotchat.org) with IRC operator r00t.
 
 ## How do I run it?
-You'll need to build the docker image from the Dockerfile first. The setup requires you give roulette-linux a hosted file (which will be mounted at /tmp/tally.txt) to keep track of times the system has wiped. You'll need to edit the commands below to reflect the proper path to that file on the host system. Then, you can get roulette-linux up and running with a basic docker setup by issuing the following:
+You'll need to build the docker image from the Dockerfile first. The setup requires you give roulette-linux a mounted directory (which will be mounted at /tmp/lr) to keep track of times the system has wiped. You'll need to edit the commands below to reflect the proper path to that file on the host system. Then, you can get roulette-linux up and running with a basic docker setup by issuing the following:
 
 ```
 docker run --rm -d \
 --name roulette-linux \
 -p 80:80 \
--v /path/to/file/tally:/tmp/tally.txt \
+-v /path/to/directory:/tmp/lr \
 -t roulette-linux
 ```
 
@@ -22,7 +22,7 @@ For a more complex setup, like nginx-proxy, you'll need to expose port 80 instea
 docker run --rm -d \
 --name roulette-linux \
 --expose=80 \
--v /path/to/file/tally:/tmp/tally.txt \
+-v /path/to/directory:/tmp/lr \
 -e "VIRTUAL_HOST=example.net" \
 -e "HTTPS_METHOD=nohttps" \
 -t roulette-linux
@@ -42,7 +42,7 @@ Currently, regeneration of the container on death is done via a host cronjob. It
 
 # Let's set some stuff up, like arguments for docker.
 containerName='roulette-linux'
-containerArgs='--expose=80 -v /path/to/file/tally:/tmp/tally.txt --net proxy-net -e VIRTUAL_HOST=example.net -e HTTPS_METHOD=nohttps'
+containerArgs='--expose=80 -v /path/to/directory:/tmp/lr --net proxy-net -e VIRTUAL_HOST=example.net -e HTTPS_METHOD=nohttps'
 
 # Check `docker ps` for roulette-linux.
 check="$(docker ps | grep 'roulette-linux')"
