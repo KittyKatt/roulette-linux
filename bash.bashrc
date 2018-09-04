@@ -7,9 +7,9 @@
 PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 
 function command_not_found_handle {
-     wipe_num=$(cat /tmp/wipes)
+     wipe_num=$(awk '{print $2}' /tmp/lr/tally.txt)
      ((wipe_num++))
-     echo "$wipe_num" > /tmp/wipes
+     echo "0 $wipe_num" > /tmp/lr/tally.txt
      echo "That's all folks."
      kill $(pgrep nginx)
 }
