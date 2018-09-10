@@ -1,5 +1,5 @@
 #!/bin/sh
-touch /tmp/lr/starttime
-date +'%Y%m%d%H%M%S' > /tmp/lr/starttime
+touch /tmp/rl/starttime
+date +'%Y%m%d%H%M%S' > /tmp/rl/starttime
 cron &
 nginx

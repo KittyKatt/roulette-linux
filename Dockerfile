@@ -22,7 +22,7 @@ RUN \
   chmod 0777 /tmp/roulette.sh && \
   crontab /etc/cron.d/roullete
 
-VOLUME ["/tmp/lr"]
+VOLUME ["/tmp/rl"]
 
 WORKDIR /etc/nginx
 

@@ -18,7 +18,7 @@ declare -a command_list=(
   "users"
 )
 # Set this to the full path to tally.txt
-tally_loc=/tmp/lr/tally.txt
+tally_loc=/tmp/rl/tally.txt
 
 # Create files if not already created
 if [ ! -e $tally_loc ]; then touch $tally_loc && printf "0\n0\n" > $tally_loc; fi
@@ -26,7 +26,7 @@ if [ ! -e $tally_loc ]; then touch $tally_loc && printf "0\n0\n" > $tally_loc; f
 #Initialize varibles
 commandS_num=$(awk '{print $1}' $tally_loc)
 wipe_num=$(awk '{print $2}' $tally_loc)
-startTime=$(cat /tmp/lr/starttime)
+startTime=$(cat /tmp/rl/starttime)
 nowTime=$(date +'%Y%m%d%H%M%S')
 current_up=$(dateutils.ddiff -f '%d days, %H hours, %M minutes, %S seconds' -i '%Y%m%d%H%M%S' $startTime $nowTime)
 
