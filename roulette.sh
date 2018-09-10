@@ -46,7 +46,7 @@ function update_tally() {
   fi
 }
 
-if ${command_list[$rand]}; then
+if ${command_list[$rand]} > /dev/null 2>&1; then
   update_tally tally
   rm /var/www/html/index.html
   echo "<h1>Welcome to Suicide Linux Russian Roulette!</h1>" > /var/www/html/index.html
