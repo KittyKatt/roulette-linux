@@ -46,15 +46,20 @@ function update_tally() {
   fi
 }
 
-if ${command_list[$rand]} > /dev/null 2>&1; then
-  update_tally tally
+function create_website () {
   rm /var/www/html/index.html
+  echo "<head><title>Roulette Linux</title></head>" > /var/www/html/index.html
   echo "<h1>Welcome to Suicide Linux Russian Roulette!</h1>" > /var/www/html/index.html
   echo "<br /><ul>" >> /var/www/html/index.html
   echo "<li>Current system uptime: $current_up</li>" >> /var/www/html/index.html
   echo "<li>Current number of successful (correct) commands: $commandS_num</li>" >> /var/www/html/index.html
   echo "<li>Current number times the system has been wiped: $wipe_num</li>" >> /var/www/html/index.html
   echo "</ul>" >> /var/www/html/index.html
+}
+
+if ${command_list[$rand]} > /dev/null 2>&1; then
+  update_tally tally
+  create_website
 else
   update_tally wipe
   kill -9 $(pgrep nginx);
