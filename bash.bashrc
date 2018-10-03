@@ -10,6 +10,5 @@ function command_not_found_handle {
      wipe_num=$(awk '{print $2}' /tmp/rl/tally.txt)
      ((wipe_num++))
      echo "0 $wipe_num" > /tmp/rl/tally.txt
-     echo "That's all folks."
      kill $(pgrep nginx)
 }

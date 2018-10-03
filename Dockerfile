@@ -9,7 +9,7 @@ MAINTAINER Brett Bohnenkamper version: 1.0
 
 COPY entrypoint.sh /etc/entrypoint.sh
 COPY bash.bashrc /etc/
-COPY crontab /etc/cron.d/roullete
+COPY crontab /etc/cron.d/roulette
 COPY roulette.sh /tmp/roulette.sh
 
 RUN \
@@ -17,10 +17,10 @@ RUN \
   DEBIAN_FRONTEND=noninteractive apt-get install -y nginx cron dateutils && \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
   chown -R www-data:www-data /var/lib/nginx && \
-  chmod 0644 /etc/cron.d/roullete && \
+  chmod 0644 /etc/cron.d/roulette && \
   chmod 0777 /etc/entrypoint.sh && \
   chmod 0777 /tmp/roulette.sh && \
-  crontab /etc/cron.d/roullete
+  crontab /etc/cron.d/roulette
 
 VOLUME ["/tmp/rl"]
 
