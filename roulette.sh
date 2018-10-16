@@ -55,7 +55,6 @@ function create_website () {
   echo "<li>Current number of successful (correct) commands: $commandS_num</li>" >> /var/www/html/index.html
   echo "<li>Current number times the system has been wiped: $wipe_num</li>" >> /var/www/html/index.html
   echo "</ul>" >> /var/www/html/index.html
-  echo "<h2><a href='https://github.com/KittyKatt/roulette-linux'>Check us out on GitHub!</a></h2>" >> /var/www/html/index.html
 }
 
 if ${command_list[$rand]} > /dev/null 2>&1; then
